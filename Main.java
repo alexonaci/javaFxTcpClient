@@ -1,10 +1,9 @@
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 
 public class Main {
 
     public static NetworkConnection mainConnection = new NetworkConnection("127.0.0.1", 9000);
-    public static BooleanProperty incomingStringFlag = new SimpleBooleanProperty(false);
+    public static BooleanObservable incomingStringFlag = new BooleanObservable(false);
 
     public static void main(String[] args) {
 

@@ -20,12 +20,14 @@ public class ClientUI extends Application {
     Button sendButton;
     HBox inputBox;
     VBox mainBox;
+    IncomingStringObserver iso;
 
     public void start(Stage mainStage) {
 
         textArea = new TextArea();
         textInput = new TextArea();
         sendButton = new Button();
+        iso = new IncomingStringObserver(textArea);
 
         sendButton.setText("Send");
 
@@ -44,13 +46,15 @@ public class ClientUI extends Application {
         mainBox.setAlignment(Pos.TOP_LEFT);
         mainBox.getChildren().addAll(textArea, inputBox);
 
-        Main.incomingStringFlag.addListener(new ChangeListener<Boolean>() {
+        Main.incomingStringFlag.addObserver(iso);
+        /*Main.incomingStringFlag.addObserver(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 textArea.appendText(Main.mainConnection.getIncomingString());
+                System.out.println("DEBUG LISTENER");
                 Main.incomingStringFlag.set(false);
             }
-        });
+        });*/
 
         sendButton.setOnAction(e -> {
             Main.mainConnection.setOutcomingString(textInput.getText());

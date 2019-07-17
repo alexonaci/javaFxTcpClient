@@ -8,11 +8,12 @@ public class IncomingThread implements Runnable {
             while(true)
             {
                 System.out.println(Main.mainConnection.getIncomingString());
-                Main.incomingStringFlag.setValue(true);
+                Main.incomingStringFlag.set(true);
 
-                if(Main.incomingStringFlag.getValue() == true)
+                if(Main.incomingStringFlag.get() == true)
                 {
                     System.out.println("DEBUG flag was set to true");
+                    Main.incomingStringFlag.notifyObservers();
                 }
             }
 
